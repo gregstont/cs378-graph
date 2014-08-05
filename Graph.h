@@ -23,8 +23,11 @@
 class Graph {
     public:
     
+    /**
+     * vertex iterator 
+     * will iterate over every vertex in the graph
+     */
     class vert_iter {
-        
       private:
         std::size_t index;
         const Graph *owner;
@@ -50,6 +53,11 @@ class Graph {
             return !(lhs == rhs);
         }
         
+        /**
+         * creates a new vertex iterator
+         * @param   *owner the graph from which this iterator represents
+         * @param   ed the index of this iterator
+         */
         vert_iter(const Graph *owner_, std::size_t ed) :
             index(ed),
             owner(owner_)
@@ -65,15 +73,21 @@ class Graph {
             return index;
         }
         
+        /**
+         * (pre)increment this iterator
+         * @returns this with its new value
+         */
         vert_iter& operator ++ () {
             ++index;
             return *this;
         }
     };
     
-    
+    /**
+     * edge iterator
+     * will iterate over every edge in the graph
+     */
     class edge_iter {
-        
       private:
         std::size_t index;
         const Graph *owner;
@@ -99,8 +113,11 @@ class Graph {
             return !(lhs == rhs);
         }
         
-        
-        
+        /**
+         * creates a new edge iterator
+         * @param   *owner the graph from which this iterator represents
+         * @param   ed the index of this iterator
+         */
         edge_iter(const Graph *owner_, std::size_t ed) :
             index(ed),
             owner(owner_)
@@ -116,14 +133,21 @@ class Graph {
             return owner->edge_list[index].edge_no;
         }
         
+        /**
+         * (pre)increment this iterator
+         * @returns this with its new value
+         */
         edge_iter& operator ++ () {
             ++index;
             return *this;
         }
     };
     
+    /**
+     * adjacent vertece iterator
+     * will iterate over every vertex in the graph that has an edge from given vertex
+     */
     class adj_iter {
-        
       private:
         int vertex;
         std::size_t index;
@@ -150,6 +174,12 @@ class Graph {
             return !(lhs == rhs);
         }
         
+        /**
+         * creates a new adjcent vertex iterator
+         * @param   *owner the graph from which this iterator represents
+         * @param   ed the index of this iterator
+         * @param   vert the vertex of which to look at
+         */
         adj_iter(const Graph *owner_, std::size_t ed, int vert) :
             vertex(vert),
             index(ed),
@@ -166,6 +196,10 @@ class Graph {
             return owner->_g[vertex][index].target;
         }
         
+        /**
+         * (pre)increment this iterator
+         * @returns this with its new value
+         */
         adj_iter& operator ++ () {
             ++index;
             return *this;
