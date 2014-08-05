@@ -25,11 +25,11 @@ class Graph {
     
     class vert_iter {
         
-    private:
+      private:
         std::size_t index;
         const Graph *owner;
         
-    public:
+      public:
         /**
          * checks to see if the lhs == rhs
          * @param   lhs the left hand side in question
@@ -51,9 +51,11 @@ class Graph {
         }
         
         vert_iter(const Graph *owner_, std::size_t ed) :
-        index(ed),
-        owner(owner_)
-        {}
+            index(ed),
+            owner(owner_)
+        {
+            assert(ed >= 0);
+        }
         
         /**
          * dereference this iterator
@@ -72,11 +74,11 @@ class Graph {
     
     class edge_iter {
         
-    private:
+      private:
         std::size_t index;
         const Graph *owner;
         
-    public:
+      public:
         /**
          * checks to see if the lhs == rhs
          * @param   lhs the left hand side in question
@@ -102,7 +104,9 @@ class Graph {
         edge_iter(const Graph *owner_, std::size_t ed) :
             index(ed),
             owner(owner_)
-        {}
+        {
+            assert(ed >= 0);
+        }
         
         /**
          * dereference this iterator
@@ -120,12 +124,12 @@ class Graph {
     
     class adj_iter {
         
-    private:
+      private:
         int vertex;
         std::size_t index;
         const Graph *owner;
         
-    public:
+      public:
         /**
          * checks to see if the lhs == rhs
          * @param   lhs the left hand side in question
@@ -150,7 +154,9 @@ class Graph {
             vertex(vert),
             index(ed),
             owner(owner_)
-        {}
+        {
+            assert(ed >= 0);
+        }
         
         /**
          * dereference this iterator
@@ -171,16 +177,8 @@ class Graph {
         // typedefs
         // --------
 
-        typedef int vertex_descriptor;  // fix!
-    
-        struct edge {
-            std::size_t edge_no;
-            vertex_descriptor source;
-            vertex_descriptor target;
-            //vertex_descriptor vd;
-            //edge_descriptor ed;
-        };
-        typedef int edge_descriptor;    // fix!
+        typedef std::size_t vertex_descriptor;  // fix!
+        typedef std::size_t edge_descriptor;    // fix!
 
         typedef vert_iter vertex_iterator;    // fix!
         typedef edge_iter edge_iterator;      // fix!
@@ -189,6 +187,11 @@ class Graph {
         typedef std::size_t vertices_size_type;
         typedef std::size_t edges_size_type;
     
+        struct edge {
+            std::size_t edge_no;
+            vertex_descriptor source;
+            vertex_descriptor target;
+        };
 
 
     public:
@@ -200,36 +203,25 @@ class Graph {
          * <your documentation>
          */
         friend std::pair<edge_descriptor, bool> add_edge (vertex_descriptor vdS, vertex_descriptor vdT, Graph& graph) {
-            // <your code>
-            using namespace std;
-            //edge_descriptor ed = 0;
-            //bool            b  = false;
+            assert(vdS >= 0);
+            assert(vdT >= 0);
+            
             bool found = false;
             edge_descriptor ret = 0;
-            //cout << "Sdfssadsaddf 0" << endl;
-        
-            
             
             for(std::vector<edge>::iterator it = graph._g[vdS].begin(); it != graph._g[vdS].end(); ++it) {
-                //cout << "Sdfsdf 0" << endl;
                 if((*it).target == vdT) {
                     found = true;
                     break;
                 }
             }
-            
 
             if(!found) {
-                ret = graph.edge_label;
-                struct edge new_edge;
-                new_edge.target = vdT;
-                new_edge.source = vdS;
-                new_edge.edge_no = ret;
+                ret = graph.edge_label++;
+                struct edge new_edge = {ret, vdS, vdT};
                 graph._g[vdS].push_back(new_edge);
                 graph.edge_list.push_back(new_edge);
-                ++graph.edge_label;
             }
-            
             
             return std::make_pair(ret, !found);
         }
@@ -242,13 +234,8 @@ class Graph {
          * <your documentation>
          */
         friend vertex_descriptor add_vertex (Graph& graph) {
-            // <your code>
-            using namespace std;
-
             graph._g.push_back( std::vector<edge>() );
-            vertex_descriptor temp = graph.vertex_label;
-            ++graph.vertex_label;
-            return temp;
+            return graph.vertex_label++;
         }
 
         // -----------------
@@ -259,10 +246,7 @@ class Graph {
          * <your documentation>
          */
         friend std::pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor vd, const Graph& graph) {
-            // <your code>
-            /*static int a [] = {0, 0};     // dummy data
-            adjacency_iterator b = a;
-            adjacency_iterator e = a + 2;*/
+            assert(vd >= 0);
             return std::make_pair(adj_iter(&graph, 0, vd), adj_iter(&graph, graph._g[vd].size(), vd));
         }
 
@@ -274,28 +258,18 @@ class Graph {
          * <your documentation>
          */
         friend std::pair<edge_descriptor, bool> edge (vertex_descriptor vdS, vertex_descriptor vdT, const Graph& graph) {
-            // <your code>
+            assert(vdS >= 0);
+            assert(vdT >= 0);
             edge_descriptor ed = 0;
             bool            b  = false;
             
-            
             for(std::vector<edge>::const_iterator it = graph._g[vdS].begin(); it != graph._g[vdS].end(); ++it) {
-                //cout << "Sdfsdf 0" << endl;
                 if((*it).target == vdT) {
                     ed = (*it).edge_no;
                     b = true;
                     break;
                 }
             }
-            
-            /*
-            bool success = false;
-            edge_descriptor ret = 0;
-            if(find(graph._g[vdS].begin(), graph._g[vdS].end(), vdT) == graph._g[vdS].end()) {
-                success = true;
-                ret = graph.edge_label++;
-                graph._g[vdS].push_back(vdT);
-            }*/
             
             return std::make_pair(ed, b);
         }
@@ -308,11 +282,7 @@ class Graph {
          * <your documentation>
          */
         friend std::pair<edge_iterator, edge_iterator> edges (const Graph& graph) {
-            // <your code>
-            /*static int a [] = {0, 0};     // dummy data
-            edge_iterator b = a;
-            edge_iterator e = a + 2;*/
-            return std::make_pair(edge_iter(&graph, (std::size_t)0), edge_iter(&graph, (std::size_t)graph.edge_label));
+            return std::make_pair(edge_iter(&graph, 0), edge_iter(&graph, graph.edge_label));
         }
 
         // ---------
@@ -323,8 +293,6 @@ class Graph {
          * <your documentation>
          */
         friend edges_size_type num_edges (const Graph& graph) {
-            // <your code>
-            //edges_size_type s = 1; // fix
             return graph.edge_label;
         }
 
@@ -336,8 +304,6 @@ class Graph {
          * <your documentation>
          */
         friend vertices_size_type num_vertices (const Graph& graph) {
-            // <your code>
-            //vertices_size_type s = 1; // fix
             return graph.vertex_label;
         }
 
@@ -349,11 +315,8 @@ class Graph {
          * <your documentation>
          */
         friend vertex_descriptor source (edge_descriptor ed, const Graph& graph) {
-            // <your code>
-            using namespace std;
-            //vertex_descriptor v = 0; // fix
+            assert(ed >= 0);
             return graph.edge_list[ed].source;
-            //return v;
         }
 
         // ------
@@ -364,8 +327,7 @@ class Graph {
          * <your documentation>
          */
         friend vertex_descriptor target (edge_descriptor ed, const Graph& graph) {
-            // <your code>
-            //vertex_descriptor v = 0; // fix
+            assert(ed >= 0);
             return graph.edge_list[ed].target;
         }
 
@@ -377,9 +339,7 @@ class Graph {
          * <your documentation>
          */
         friend vertex_descriptor vertex (vertices_size_type num, const Graph& graph) {
-            // <your code>
-            //vertex_descriptor vd = 0; // fix
-            //return vd;
+            assert(num >= 0);
             return num;
         }
 
@@ -398,10 +358,10 @@ class Graph {
         // ----
         // data
         // ----
-        std::vector< std::vector<Graph::edge> > _g; // something like this
-        vertex_descriptor vertex_label;
-        edge_descriptor edge_label;
-        std::deque<edge> edge_list;
+        std::vector< std::vector<Graph::edge> > _g;     //the 2d structure
+        vertex_descriptor vertex_label;                 //counter for vertex labels
+        edge_descriptor edge_label;                     //counter for edge labels
+        std::deque<edge> edge_list;                     //could get rid of this...
 
         // -----
         // valid
@@ -411,8 +371,7 @@ class Graph {
          * <your documentation>
          */
         bool valid () const {
-            // <your code>
-            return true;
+            return vertex_label >= 0 && edge_label >= 0;
         }
 
     public:
@@ -424,7 +383,6 @@ class Graph {
          * <your documentation>
          */
         Graph () {
-            // <your code>
             vertex_label = 0;
             edge_label = 0;
             assert(valid());
