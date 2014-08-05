@@ -21,7 +21,55 @@
 // -----
 
 class Graph {
-public:
+    public:
+    
+    class vert_iter {
+        
+    private:
+        std::size_t index;
+        const Graph *owner;
+        
+    public:
+        /**
+         * checks to see if the lhs == rhs
+         * @param   lhs the left hand side in question
+         * @param   rhs the right hand side in question
+         * @return  true if the lhs and rhs point to the same value
+         */
+        friend bool operator == (const vert_iter& lhs, const vert_iter& rhs) {
+            return (lhs.owner == rhs.owner) && (lhs.index == rhs.index);;
+        }
+        
+        /**
+         * checks to see if the lhs != rhs
+         * @param   lhs the left hand side in question
+         * @param   rhs the right hand side in question
+         * @return  false if the lhs and rhs point to the same value
+         */
+        friend bool operator != (const vert_iter& lhs, const vert_iter& rhs) {
+            return !(lhs == rhs);
+        }
+        
+        vert_iter(const Graph *owner_, std::size_t ed) :
+        index(ed),
+        owner(owner_)
+        {}
+        
+        /**
+         * dereference this iterator
+         * @returns the value at which this iterator is pointing
+         */
+        int operator * () const {
+            return index;
+        }
+        
+        vert_iter& operator ++ () {
+            ++index;
+            return *this;
+        }
+    };
+    
+    
     class edge_iter {
         
     private:
@@ -52,11 +100,9 @@ public:
         
         
         edge_iter(const Graph *owner_, std::size_t ed) :
+            index(ed),
             owner(owner_)
-        {
-            //owner = owner_;
-            index = ed;
-        }
+        {}
         
         /**
          * dereference this iterator
@@ -67,6 +113,54 @@ public:
         }
         
         edge_iter& operator ++ () {
+            ++index;
+            return *this;
+        }
+    };
+    
+    class adj_iter {
+        
+    private:
+        int vertex;
+        std::size_t index;
+        const Graph *owner;
+        
+    public:
+        /**
+         * checks to see if the lhs == rhs
+         * @param   lhs the left hand side in question
+         * @param   rhs the right hand side in question
+         * @return  true if the lhs and rhs point to the same value
+         */
+        friend bool operator == (const adj_iter& lhs, const adj_iter& rhs) {
+            return (lhs.owner == rhs.owner) && (lhs.index == rhs.index) && (lhs.vertex == rhs.vertex);
+        }
+        
+        /**
+         * checks to see if the lhs != rhs
+         * @param   lhs the left hand side in question
+         * @param   rhs the right hand side in question
+         * @return  false if the lhs and rhs point to the same value
+         */
+        friend bool operator != (const adj_iter& lhs, const adj_iter& rhs) {
+            return !(lhs == rhs);
+        }
+        
+        adj_iter(const Graph *owner_, std::size_t ed, int vert) :
+            vertex(vert),
+            index(ed),
+            owner(owner_)
+        {}
+        
+        /**
+         * dereference this iterator
+         * @returns the value at which this iterator is pointing
+         */
+        int operator * () const {
+            return owner->_g[vertex][index].target;
+        }
+        
+        adj_iter& operator ++ () {
             ++index;
             return *this;
         }
@@ -88,9 +182,9 @@ public:
         };
         typedef int edge_descriptor;    // fix!
 
-        typedef int* vertex_iterator;    // fix!
+        typedef vert_iter vertex_iterator;    // fix!
         typedef edge_iter edge_iterator;      // fix!
-        typedef int* adjacency_iterator; // fix!
+        typedef adj_iter adjacency_iterator; // fix!
 
         typedef std::size_t vertices_size_type;
         typedef std::size_t edges_size_type;
@@ -164,12 +258,12 @@ public:
         /**
          * <your documentation>
          */
-        friend std::pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor, const Graph&) {
+        friend std::pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor vd, const Graph& graph) {
             // <your code>
-            static int a [] = {0, 0};     // dummy data
+            /*static int a [] = {0, 0};     // dummy data
             adjacency_iterator b = a;
-            adjacency_iterator e = a + 2;
-            return std::make_pair(b, e);
+            adjacency_iterator e = a + 2;*/
+            return std::make_pair(adj_iter(&graph, 0, vd), adj_iter(&graph, graph._g[vd].size(), vd));
         }
 
         // ----
@@ -296,12 +390,8 @@ public:
         /**
          * <your documentation>
          */
-        friend std::pair<vertex_iterator, vertex_iterator> vertices (const Graph&) {
-            // <your code>
-            static int a [] = {0, 0};     // dummy data
-            vertex_iterator b = a;
-            vertex_iterator e = a + 2;
-            return std::make_pair(b, e);
+        friend std::pair<vertex_iterator, vertex_iterator> vertices (const Graph& graph) {
+            return std::make_pair(vert_iter(&graph,0), vert_iter(&graph, graph.vertex_label));
         }
 
     private:
