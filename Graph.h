@@ -211,20 +211,20 @@ class Graph {
         // typedefs
         // --------
 
-        typedef std::size_t vertex_descriptor;
-        typedef std::size_t edge_descriptor; //should make this struct edge, then could get rid of edge list
+        typedef std::size_t     vertex_descriptor;
+        typedef std::size_t     edge_descriptor; //should make this struct edge, then could get rid of edge list
 
-        typedef vert_iter vertex_iterator;
-        typedef edge_iter edge_iterator;
-        typedef adj_iter adjacency_iterator;
+        typedef vert_iter       vertex_iterator;
+        typedef edge_iter       edge_iterator;
+        typedef adj_iter        adjacency_iterator;
 
-        typedef std::size_t vertices_size_type;
-        typedef std::size_t edges_size_type;
+        typedef std::size_t     vertices_size_type;
+        typedef std::size_t     edges_size_type;
     
         struct edge {
-            std::size_t edge_no;
-            vertex_descriptor source;
-            vertex_descriptor target;
+            std::size_t         edge_no;
+            vertex_descriptor   source;
+            vertex_descriptor   target;
         };
 
 

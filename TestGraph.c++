@@ -550,18 +550,6 @@ TYPED_TEST(TestGraph, num_vert_3) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 TYPED_TEST(TestGraph, source_1) {
     ALL_OF_IT
     using namespace std;
@@ -577,13 +565,6 @@ TYPED_TEST(TestGraph, source_1) {
     ASSERT_EQ(source(edAB, g), 0);
     ASSERT_EQ(0, vdA);
 }
-
-
-
-
-
-
-
 TYPED_TEST(TestGraph, source_2) {
     ALL_OF_IT
     
@@ -783,3 +764,764 @@ TYPED_TEST(TestGraph, vertices_3) {
     ASSERT_EQ(e, b);
 }
 
+
+TYPED_TEST(TestGraph, vertex_iter_equals_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    
+    std::pair<vertex_iterator, vertex_iterator> q = vertices(g);
+    vertex_iterator                             d = q.first;
+    vertex_iterator                             r = q.second;
+    
+    ASSERT_EQ(b, d);
+    ASSERT_EQ(e, r);
+}
+TYPED_TEST(TestGraph, vertex_iter_equals_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    //vertex_descriptor vdB = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    
+    std::pair<vertex_iterator, vertex_iterator> q = vertices(g);
+    vertex_iterator                             d = q.first;
+    vertex_iterator                             r = q.second;
+    
+    ASSERT_EQ(b, d);
+    ASSERT_EQ(e, r);
+}
+
+TYPED_TEST(TestGraph, vertex_iter_equals_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    //vertex_descriptor vdB = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    
+    std::pair<vertex_iterator, vertex_iterator> q = vertices(g);
+    vertex_iterator                             d = q.first;
+    vertex_iterator                             r = q.second;
+    
+    ASSERT_EQ(b, d);
+    ASSERT_EQ(e, r);
+    
+    ASSERT_EQ(++b, e);
+}
+
+TYPED_TEST(TestGraph, vertex_iter_not_equals_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    
+    std::pair<vertex_iterator, vertex_iterator> q = vertices(g);
+    vertex_iterator                             d = q.first;
+    vertex_iterator                             r = q.second;
+    
+    ASSERT_TRUE(b != e);
+    ASSERT_TRUE(d != r);
+}
+TYPED_TEST(TestGraph, vertex_iter_not_equals_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    //vertex_descriptor vdB = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    
+    std::pair<vertex_iterator, vertex_iterator> q = vertices(g);
+    vertex_iterator                             d = q.first;
+    vertex_iterator                             r = q.second;
+    
+    ASSERT_TRUE(b != e);
+    ASSERT_TRUE(d != r);
+}
+TYPED_TEST(TestGraph, vertex_iter_not_equals_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    
+    std::pair<vertex_iterator, vertex_iterator> q = vertices(g);
+    vertex_iterator                             d = q.first;
+    vertex_iterator                             r = q.second;
+    
+    ASSERT_TRUE(++b != e);
+    ASSERT_TRUE(++d != r);
+}
+
+
+TYPED_TEST(TestGraph, vertex_iter_star_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdA, vd);}
+    ++b;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdB, vd);}
+    ++b;
+    ASSERT_EQ(e, b);
+}
+TYPED_TEST(TestGraph, vertex_iter_star_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdA, vd);}
+    ++b;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdB, vd);}
+    ++b;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdC, vd);}
+    ++b;
+    ASSERT_EQ(e, b);
+}
+TYPED_TEST(TestGraph, vertex_iter_star_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    
+    ASSERT_EQ(e, b);
+}
+
+TYPED_TEST(TestGraph, vertex_iter_inc_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdA, vd);}
+    ++b;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdB, vd);}
+    ++b;
+    ASSERT_EQ(e, b);
+}
+TYPED_TEST(TestGraph, vertex_iter_inc_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdA, vd);}
+    ++b;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdB, vd);}
+    ++b;
+    if (b != e) {
+        vertex_descriptor vd = *b;
+        ASSERT_EQ(vdC, vd);}
+    ++b;
+    ASSERT_EQ(e, b);
+}
+TYPED_TEST(TestGraph, vertex_iter_inc_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    add_vertex(g);
+    
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator                             b = p.first;
+    vertex_iterator                             e = p.second;
+    
+    ASSERT_EQ(e, ++b);
+}
+
+
+
+
+
+TYPED_TEST(TestGraph, edge_iter_equals_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    //edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+
+    ASSERT_EQ(e, ++b);
+}
+TYPED_TEST(TestGraph, edge_iter_equals_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    
+    ASSERT_EQ(e, ++++b);
+}
+TYPED_TEST(TestGraph, edge_iter_equals_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    //edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    //edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    
+    ASSERT_EQ(e, b);
+}
+
+TYPED_TEST(TestGraph, edge_iter_not_equals_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    //edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    
+    ASSERT_TRUE(b != e);
+}
+TYPED_TEST(TestGraph, edge_iter_not_equals_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    
+    ASSERT_TRUE(++b != e);
+}
+TYPED_TEST(TestGraph, edge_iter_not_equals_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    
+    ASSERT_TRUE(e != b);
+}
+
+
+
+
+
+TYPED_TEST(TestGraph, edge_iter_star_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edAB, ed);}
+    ++b;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edAC, ed);}
+    ++b;
+    ASSERT_EQ(e, b);
+}
+TYPED_TEST(TestGraph, edge_iter_star_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    edge_descriptor edBC = add_edge(vdB, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edAB, ed);}
+    ++b;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edAC, ed);}
+    ++b;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edBC, ed);}
+    ++b;
+    ASSERT_EQ(e, b);
+}
+TYPED_TEST(TestGraph, edge_iter_star_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    
+    ASSERT_EQ(*b, edAB);
+}
+
+
+
+
+TYPED_TEST(TestGraph, edge_iter_inc_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edAB, ed);}
+    ++b;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edAC, ed);}
+    ++b;
+    ASSERT_EQ(e, b);
+}
+TYPED_TEST(TestGraph, edge_iter_inc_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    edge_descriptor edAC = add_edge(vdA, vdC, g).first;
+    edge_descriptor edBC = add_edge(vdB, vdC, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edAB, ed);}
+    ++b;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edAC, ed);}
+    ++b;
+    if (b != e) {
+        edge_descriptor ed = *b;
+        ASSERT_EQ(edBC, ed);}
+    ++b;
+    ASSERT_EQ(e, b);
+}
+TYPED_TEST(TestGraph, edge_iter_inc_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator                           b = p.first;
+    edge_iterator                           e = p.second;
+    
+    ASSERT_EQ(e, ++b);
+}
+
+
+
+
+TYPED_TEST(TestGraph, adj_vert_iter_equals_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_EQ(b, e);
+}
+TYPED_TEST(TestGraph, adj_vert_iter_equals_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<edge_descriptor, bool> p1 = add_edge(vdB, vdA, g);
+    ASSERT_EQ(true, p1.second);
+
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_EQ(++b, e);
+}
+TYPED_TEST(TestGraph, adj_vert_iter_equals_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    add_edge(vdB, vdB, g);
+    add_edge(vdB, vdC, g);
+
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_EQ(++++b, e);
+}
+
+
+
+TYPED_TEST(TestGraph, adj_vert_iter_not_equals_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    add_edge(vdB, vdA, g);
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_TRUE(b != e);
+}
+TYPED_TEST(TestGraph, adj_vert_iter_not_equals_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<edge_descriptor, bool> p1 = add_edge(vdB, vdA, g);
+    ASSERT_EQ(true, p1.second);
+
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_TRUE(b != e);
+}
+TYPED_TEST(TestGraph, adj_vert_iter_not_equals_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    add_edge(vdB, vdB, g);
+    add_edge(vdB, vdC, g);
+
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_TRUE(++b != e);
+}
+
+
+
+TYPED_TEST(TestGraph, adj_vert_iter_star_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<edge_descriptor, bool> p1 = add_edge(vdB, vdA, g);
+    std::pair<edge_descriptor, bool> p2 = add_edge(vdB, vdC, g);
+    ASSERT_EQ(true, p1.second);
+    ASSERT_EQ(true, p2.second);
+    
+    edges_size_type es = num_edges(g);
+    ASSERT_EQ(2, es);
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_EQ(vdA, *b);
+    ++b;
+    ASSERT_EQ(vdC, *b);
+}
+TYPED_TEST(TestGraph, adj_vert_iter_star_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<edge_descriptor, bool> p1 = add_edge(vdB, vdA, g);
+    std::pair<edge_descriptor, bool> p2 = add_edge(vdC, vdB, g);
+    ASSERT_EQ(true, p1.second);
+    ASSERT_EQ(true, p2.second);
+    
+    edges_size_type es = num_edges(g);
+    ASSERT_EQ(2, es);
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_EQ(vdA, *b);
+
+}
+TYPED_TEST(TestGraph, adj_vert_iter_star_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<edge_descriptor, bool> p1 = add_edge(vdB, vdB, g);
+    ASSERT_EQ(true, p1.second);
+    
+    edges_size_type es = num_edges(g);
+    ASSERT_EQ(1, es);
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_EQ(vdB, *b);
+}
+
+
+
+TYPED_TEST(TestGraph, adj_vert_iter_inc_1) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<edge_descriptor, bool> p1 = add_edge(vdB, vdA, g);
+    std::pair<edge_descriptor, bool> p2 = add_edge(vdB, vdC, g);
+    ASSERT_EQ(true, p1.second);
+    ASSERT_EQ(true, p2.second);
+    
+    edges_size_type es = num_edges(g);
+    ASSERT_EQ(2, es);
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_EQ(vdA, *b);
+    ++b;
+    ASSERT_EQ(vdC, *b);
+}
+TYPED_TEST(TestGraph, adj_vert_iter_inc_2) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    std::pair<edge_descriptor, bool> p1 = add_edge(vdB, vdA, g);
+    ASSERT_EQ(true, p1.second);
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_EQ(++b, e);
+}
+TYPED_TEST(TestGraph, adj_vert_iter_inc_3) {
+    ALL_OF_IT
+    
+    graph_type g;
+    
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdC = add_vertex(g);
+    
+    add_edge(vdB, vdB, g);
+    add_edge(vdB, vdC, g);
+    
+    std::pair<adjacency_iterator, adjacency_iterator> p = adjacent_vertices(vdB, g);
+    adjacency_iterator                             b = p.first;
+    adjacency_iterator                             e = p.second;
+    
+    ASSERT_TRUE(++b != e);
+}
