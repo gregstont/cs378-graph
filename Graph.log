@@ -1,0 +1,72 @@
+commit 65705f10e4e570c4c7da935865bfd19bbf318090
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 19:58:54 2014 -0500
+
+    closes #16, closes #20; now uses vector
+
+commit d575221aad35039c50c316584d8a773c8793f8a6
+Merge: 2b622e3 7e415af
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 19:58:28 2014 -0500
+
+    Merge branch 'master' of github.com:gregstont/cs378-graph
+
+commit 2b622e303afc6590ff3cddb985ea3b69e8d545f2
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 19:57:50 2014 -0500
+
+    closes #16, closes #20; now uses vector
+
+commit 7e415afdb3193405fa8682fa167fdd91ab1afe85
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 17:59:20 2014 -0500
+
+    closes #8; added documentation
+
+commit ca1d53de6a3ffe462671ab45aeb6669cb0412578
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 17:48:04 2014 -0500
+
+    closes #13; added tests for all iterators
+
+commit 22ee0012cd04b99690b350d85fb3db9e8258658a
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 17:20:41 2014 -0500
+
+    closes #15; added comments
+
+commit d35e4944471be89109b29d37d8d1f292f8c47496
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 13:42:48 2014 -0500
+
+    closes #14; comments added to iterators
+
+commit ac4b090fa2736154f42bb01269460a036a8b859c
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 12:43:45 2014 -0500
+
+    closes #6; simple solution done, added assertions
+
+commit 7e31f080fd0c8347d8c585281a5e2c305531590f
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 00:25:30 2014 -0500
+
+    closes #11; added iterators
+
+commit cafa7f482f5300286089b1139e11df62cf2cc36f
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 00:10:06 2014 -0500
+
+    removed old folders
+
+commit f1547b3798c70aa9dca44fb327ccee25374dc2a4
+Author: gregstont <gregstont@gmail.com>
+Date:   Tue Aug 5 00:09:08 2014 -0500
+
+    closes #12; basics done, need to work on iterators
+
+commit 62ee1712ae6f649e31597ae81286c2d8aa89803f
+Author: gregstont <gregstont@gmail.com>
+Date:   Mon Aug 4 18:01:00 2014 -0500
+
+    initial commit
