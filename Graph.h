@@ -15,7 +15,7 @@
 #include <cstddef> // size_t
 #include <utility> // make_pair, pair
 #include <vector>  // vector
-#include <deque>
+
 // -----
 // Graph
 // -----
@@ -431,7 +431,7 @@ class Graph {
         std::vector< std::vector<Graph::edge> > _g;     //the 2d structure
         vertex_descriptor vertex_label;                 //counter for vertex labels
         edge_descriptor edge_label;                     //counter for edge labels
-        std::deque<edge> edge_list;                     //could get rid of this...
+        std::vector<edge> edge_list;                     //could get rid of this...
 
         // -----
         // valid
